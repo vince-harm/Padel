@@ -6,7 +6,7 @@ import { uuid } from '../shared/uuid';
   providedIn: 'root'
 })
 export class PadelService {
-  private sites: PadelSite[] = [
+  private readonly sites: PadelSite[] = [
     {
       id: uuid(),
       city: 'Bruxelles',
