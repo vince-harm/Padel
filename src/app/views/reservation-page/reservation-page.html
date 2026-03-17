@@ -1,18 +1,57 @@
 @if (site(); as currentSite) {
-  <div class="p-10">
-    <h1 class="text-4xl font-black mb-10">{{ currentSite.clubName }}</h1>
+  <div class="min-h-screen bg-slate-50 p-6 md:p-12 font-sans">
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter">
+        {{ currentSite.clubName }}
+      </h1>
+      <p class="text-slate-500 mt-4 text-sm md:text-base">
+        {{ currentSite.city }} — Choisissez votre terrain pour accéder au calendrier.
+      </p>
+      <div class="w-16 h-1 bg-slate-900 mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto items-stretch">
       @for (court of currentSite.courts; track court.id) {
-        <div (click)="selectCourt(court)"
-             [class.border-slate-900]="selectedCourt()?.id === court.id"
-             class="border-2 p-6 rounded-3xl cursor-pointer hover:bg-slate-50 transition-all">
-          <h3 class="font-bold text-xl">{{ court.name }}</h3>
-          <p class="text-slate-500">{{ court.type }}</p>
-        </div>
+        <mat-card (click)="selectCourt(court)"
+                  [class.padel-card-selected]="selectedCourt()?.id === court.id"
+                  class="padel-card group">
+
+          <mat-card-header class="p-8">
+            <div mat-card-avatar
+                 class="!bg-slate-800 !text-white rounded-2xl flex items-center justify-center font-black shadow-sm">
+              {{ currentSite.initial }}
+            </div>
+            <mat-card-title class="font-black text-2xl tracking-tight text-slate-800 uppercase">
+              {{ court.name }}
+            </mat-card-title>
+            <mat-card-subtitle class="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">
+              Padel {{ court.type }}
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <div class="card-image-container">
+            <img mat-card-image
+                 [src]="court.type.toLowerCase() === 'indoor' ? 'images/indoor_padel.jpg' : 'images/outdoor_padel.jpg'"
+                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+          </div>
+
+          <mat-card-content class="p-8 flex-grow text-slate-500 text-sm leading-relaxed">
+            Profitez d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
+          </mat-card-content>
+
+          <mat-card-actions class="p-8 pt-0">
+            <button mat-flat-button class="btn-primary-padel">
+              {{ selectedCourt()?.id === court.id ? 'Terrain Sélectionné' : 'Choisir ce terrain' }}
+            </button>
+          </mat-card-actions>
+        </mat-card>
       }
     </div>
+
   </div>
 } @else {
-  <p>Site non trouvé...</p>
+  <div class="min-h-screen flex items-center justify-center bg-slate-50">
+    <p class="font-black uppercase tracking-widest text-slate-300">Chargement du centre...</p>
+  </div>
 }

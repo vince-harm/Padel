@@ -1,3 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import 'tailwindcss';
+
+@layer components {
+  .padel-card {
+    @apply !rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500
+    border-none overflow-hidden bg-white flex flex-col min-h-[500px];
+  }
+
+  .card-image-container {
+    @apply h-64 w-full overflow-hidden bg-slate-200 relative;
+  }
+
+  .btn-primary-padel {
+    @apply w-full !py-8 !rounded-2xl font-black text-base uppercase tracking-widest
+    !bg-slate-900 !text-white hover:!bg-slate-800 transition-all;
+  }
+}
+@layer components {
+  /* La carte de club / terrain "Signature" */
+  .padel-card {
+    @apply !rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500
+    border-none overflow-hidden bg-white flex flex-col min-h-[500px] cursor-pointer;
+  }
+
+  /* L'état sélectionné */
+  .padel-card-selected {
+    @apply ring-4 ring-slate-900 ring-offset-4;
+  }
+
+  /* Le bouton d'action massif */
+  .btn-primary-padel {
+    @apply w-full !py-8 !rounded-2xl font-black text-base uppercase tracking-widest
+    !bg-slate-900 !text-white hover:!bg-slate-800 transition-all;
+  }
+
+  /* Le conteneur d'image */
+  .card-image-container {
+    @apply h-64 w-full overflow-hidden bg-slate-200 relative;
+  }
+}

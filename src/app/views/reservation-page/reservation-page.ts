@@ -2,26 +2,38 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PadelService } from '../../services/padel.service';
 import { PadelSite, PadelCourt } from '../../shared/site.model';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reservation-page',
   standalone: true,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    DatePipe
+  ],
   templateUrl: './reservation-page.html'
 })
 export class ReservationPage implements OnInit {
   private route = inject(ActivatedRoute);
   private padelService = inject(PadelService);
 
-
   site = signal<PadelSite | undefined>(undefined);
   selectedCourt = signal<PadelCourt | undefined>(undefined);
 
-  ngOnInit() {
+  // Signal pour stocker la date sélectionnée (par défaut aujourd'hui)
+  selectedDate = signal<Date | null>(new Date());
 
+  ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      const found = this.padelService.getSiteById(id);
-      this.site.set(found);
+      this.site.set(this.padelService.getSiteById(id));
     }
   }
 
