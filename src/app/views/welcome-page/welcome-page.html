@@ -10,41 +10,20 @@
 
   <div class="court-grid">
     @for (site of sites; track site.id) {
-      <mat-card class="padel-card group">
+      <app-padel-card
+        [title]="site.city"
+        [subtitle]="site.clubName"
+        [initial]="site.initial"
+        [image]="site.image"
+        [buttonLabel]="'Réserver à ' + site.city"
+        [routerLink]="['/reserver', site.id]">
 
-        <mat-card-header class="p-8">
-          <div mat-card-avatar class="padel-avatar">
-            {{ site.initial }}
-          </div>
-          <mat-card-title class="font-black text-2xl tracking-tight text-slate-800 uppercase">
-            {{ site.city }}
-          </mat-card-title>
-          <mat-card-subtitle class="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">
-            {{ site.clubName }}
-          </mat-card-subtitle>
-        </mat-card-header>
+        <p class="card-description">
+          {{ site.description }}
+        </p>
 
-        <div class="card-image-container">
-          <img mat-card-image
-               [src]="site.image"
-               [alt]="site.city"
-               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-        </div>
-
-        <mat-card-content class="p-8 flex-grow">
-          <p class="card-description">
-            {{ site.description }}
-          </p>
-        </mat-card-content>
-
-        <mat-card-actions class="p-8 pt-0">
-          <button mat-flat-button
-                  [routerLink]="['/reserver', site.id]"
-                  class="btn-primary-padel">
-            Réserver à {{ site.city }}
-          </button>
-        </mat-card-actions>
-      </mat-card>
+      </app-padel-card>
     }
   </div>
+
 </div>

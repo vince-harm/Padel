@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {DatePipe} from '@angular/common';
+import {PadelCardComponent} from '../padel-card/padel-card';
 
 @Component({
   selector: 'app-reservation-page',
@@ -15,7 +16,8 @@ import {DatePipe} from '@angular/common';
     MatCardModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    PadelCardComponent
   ],
   templateUrl: './reservation-page.html'
 })

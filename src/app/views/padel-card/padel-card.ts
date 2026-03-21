@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-padel-card',
   standalone: true,
   imports: [CommonModule, MatCardModule, MatButtonModule],
-  templateUrl: './padel-card.component.html'
+  templateUrl: './padel-card.html'
 })
 export class PadelCardComponent {
   // Les entrées (données venant du parent)

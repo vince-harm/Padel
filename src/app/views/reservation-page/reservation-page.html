@@ -6,43 +6,23 @@
       <p class="text-slate-500 mt-4">
         {{ currentSite.city }} — Choisissez votre terrain pour accéder au calendrier.
       </p>
-      <div class="w-16 h-1 bg-slate-900 mx-auto mt-4 rounded-full"></div>
+      <div class="title-separator"></div>
     </header>
 
     <div class="court-grid">
       @for (court of currentSite.courts; track court.id) {
-        <mat-card (click)="selectCourt(court)"
-                  [class.padel-card-selected]="selectedCourt()?.id === court.id"
-                  class="padel-card group">
+        <app-padel-card
+          [title]="court.name"
+          [subtitle]="'Padel ' + court.type"
+          [initial]="currentSite.initial"
+          [image]="court.type.toLowerCase() === 'indoor' ? 'images/indoor_padel.jpg' : 'images/outdoor_padel.jpg'"
+          [isSelected]="selectedCourt()?.id === court.id"
+          [buttonLabel]="selectedCourt()?.id === court.id ? 'Terrain Sélectionné' : 'Choisir ce terrain'"
+          (cardClick)="selectCourt(court)">
 
-          <mat-card-header class="p-8">
-            <div mat-card-avatar class="padel-avatar">
-              {{ currentSite.initial }}
-            </div>
-            <mat-card-title class="font-black text-2xl uppercase tracking-tight text-slate-800">
-              {{ court.name }}
-            </mat-card-title>
-            <mat-card-subtitle class="text-slate-400 font-bold uppercase text-[10px] tracking-[0.2em] mt-1">
-              Padel {{ court.type }}
-            </mat-card-subtitle>
-          </mat-card-header>
+          Profitez d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
 
-          <div class="card-image-container">
-            <img mat-card-image
-                 [src]="court.type.toLowerCase() === 'indoor' ? 'images/indoor_padel.jpg' : 'images/outdoor_padel.jpg'"
-                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
-          </div>
-
-          <mat-card-content class="p-8 flex-grow text-slate-500 text-sm leading-relaxed">
-            Profitez d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
-          </mat-card-content>
-
-          <mat-card-actions class="p-8 pt-0">
-            <button mat-flat-button class="btn-primary-padel">
-              {{ selectedCourt()?.id === court.id ? 'Terrain Sélectionné' : 'Choisir ce terrain' }}
-            </button>
-          </mat-card-actions>
-        </mat-card>
+        </app-padel-card>
       }
     </div>
 
