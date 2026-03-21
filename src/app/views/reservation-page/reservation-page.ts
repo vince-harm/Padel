@@ -6,9 +6,10 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {DatePipe} from '@angular/common';
 import {PadelCardComponent} from '../padel-card/padel-card';
 import {DateSelectorComponent} from '../date-selector/date-selector';
+import {TimeSlotsComponent} from '../time-slot/time-slot';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-reservation-page',
@@ -19,7 +20,9 @@ import {DateSelectorComponent} from '../date-selector/date-selector';
     MatDatepickerModule,
     MatNativeDateModule,
     PadelCardComponent,
-    DateSelectorComponent
+    DateSelectorComponent,
+    TimeSlotsComponent,
+    DatePipe
   ],
   templateUrl: './reservation-page.html'
 })
@@ -29,10 +32,8 @@ export class ReservationPage implements OnInit {
 
   site = signal<PadelSite | undefined>(undefined);
   selectedCourt = signal<PadelCourt | undefined>(undefined);
-
-  // Signal pour stocker la date sélectionnée (par défaut aujourd'hui)
   selectedDate = signal<Date | null>(new Date());
-
+  selectedTime = signal<string | null>(null);
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id');
@@ -40,12 +41,20 @@ export class ReservationPage implements OnInit {
       this.site.set(this.padelService.getSiteById(id));
     }
   }
+
+  onTimeSelected(time: string) {
+    console.log('Heure sélectionnée :', time);
+    this.selectedTime.set(time);
+  }
+
   onDateSelected(date: Date) {
     console.log('Nouvelle date sélectionnée :', date);
     this.selectedDate.set(date);
+    this.selectedTime.set(null);
   }
 
   selectCourt(court: PadelCourt) {
     this.selectedCourt.set(court);
+    this.selectedTime.set(null);
   }
 }

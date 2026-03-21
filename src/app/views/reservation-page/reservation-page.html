@@ -25,15 +25,35 @@
         </app-padel-card>
       }
     </div>
-    @if (selectedCourt() ; as court) {
+    @if (selectedCourt(); as court) {
       <div class="animate-in fade-in slide-in-from-bottom-4 duration-500">
+
         <app-date-selector
           [courtName]="court.name"
+          [initialDate]="selectedDate()"
           (dateChange)="onDateSelected($event)">
         </app-date-selector>
+        <app-time-slots
+          (slotSelected)="onTimeSelected($event)">
+        </app-time-slots>
+
+        @if (selectedTime()) {
+          <div class="mt-12 p-8 bg-slate-900 rounded-[2rem] text-white shadow-2xl animate-in zoom-in duration-300">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+              <div>
+                <p class="text-slate-400 uppercase tracking-widest text-xs font-black mb-1">Votre réservation</p>
+                <h3 class="text-2xl font-bold">
+                  {{ court.name }} • {{ selectedDate() | date:'dd MMM' }} à {{ selectedTime() }}
+                </h3>
+              </div>
+              <button mat-flat-button color="primary" class="h-16 px-10 rounded-2xl text-lg font-black uppercase tracking-wide">
+                Réserver maintenant
+              </button>
+            </div>
+          </div>
+        }
       </div>
     }
-
   </div>
 } @else {
   <div class="min-h-screen flex items-center justify-center bg-slate-50">
