@@ -3,9 +3,9 @@ import { CommonModule, DatePipe } from '@angular/common';
 
 interface DayItem {
   date: Date;
-  dayName: string;    // 'Lun', 'Mar'...
-  dayNumber: string;  // '25'
-  monthName: string;  // 'MARS'
+  dayName: string;
+  dayNumber: string;
+  monthName: string;
 }
 
 @Component({
@@ -20,7 +20,7 @@ export class DateSelectorComponent implements OnInit {
   initialDate = input<Date | null>(null);
   private datePipe = inject(DatePipe);
 
-  // Événement pour envoyer la date au parent (ReservationPage)
+
   dateChange = output<Date>();
 
   // Date sélectionnée
@@ -32,10 +32,6 @@ export class DateSelectorComponent implements OnInit {
   ngOnInit() {
     this.generateThreeWeeks();
   }
-
-  /**
-   * Génère les 21 jours (3 semaines) à partir d'aujourd'hui
-   */
   generateThreeWeeks() {
     const days: DayItem[] = [];
     const today = this.resetTime(new Date());

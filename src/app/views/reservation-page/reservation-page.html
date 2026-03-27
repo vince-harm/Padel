@@ -4,7 +4,7 @@
     <header class="page-header">
       <h1 class="page-title">{{ currentSite.clubName }}</h1>
       <p class="text-slate-500 mt-4">
-        {{ currentSite.city }} — Choisissez votre terrain pour accéder au calendrier.
+        {{ currentSite.city }} — Choisisser votre terrain pour accéder au calendrier.
       </p>
       <div class="title-separator"></div>
     </header>
@@ -20,7 +20,7 @@
           [buttonLabel]="selectedCourt()?.id === court.id ? 'Terrain Sélectionné' : 'Choisir ce terrain'"
           (cardClick)="selectCourt(court)">
 
-          Profitez d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
+          Profiter d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
 
         </app-padel-card>
       }
@@ -40,15 +40,21 @@
         @if (selectedTime()) {
           <div class="reservation-summary-card animate-in">
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
-              <div>
-                <p class="text-slate-400 uppercase tracking-widest text-xs font-black mb-1">Votre réservation</p>
-                <h3 class="text-2xl font-bold">
-                  {{ court.name }} • {{ selectedDate() | date:'dd MMM' }} à {{ selectedTime() }}
+              <div class="text-left w-full">
+                <p class="text-slate-400 uppercase tracking-widest text-[10px] font-black mb-2">
+                  Votre réservation
+                </p>
+                <h3 class="text-white text-xl md:text-2xl font-black">
+                  {{ court.name }} <span class="text-emerald-400 mx-1">•</span>
+                  {{ selectedDate() | date:'dd MMMM' }} à {{ selectedTime() }}
                 </h3>
               </div>
-              <button mat-flat-button class="btn-confirm-final">
-                Réserver maintenant
-              </button>
+
+              <div class="w-full md:w-auto">
+                <button mat-flat-button color="primary" class="h-16 px-10 rounded-2xl text-lg font-black uppercase tracking-wide">
+                  Réserver maintenant
+                </button>
+              </div>
             </div>
           </div>
         }
