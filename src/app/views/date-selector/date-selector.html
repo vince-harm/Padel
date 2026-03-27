@@ -1,20 +1,19 @@
-<div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 mb-10">
-  <h2 class="font-black uppercase tracking-widest text-sm mb-6 text-slate-900">
-    1. Choisir la date pour le terrain {{ courtName() }}
+<div class="mt-20 mb-10 max-w-full overflow-hidden">
+  <h2 class="px-6 font-black uppercase tracking-widest text-[10px] mb-6 text-slate-400">
+    1. Choisir la date (Dispo 3 semaines)
   </h2>
 
-  <mat-form-field class="w-full" appearance="outline">
-    <mat-label>Sélectionnez une date</mat-label>
-    <input matInput
-           readonly
-           [matDatepicker]="picker"
-           [min]="minDate"
-           [max]="maxDate"
-           [ngModel]="initialDate()"
-           (dateChange)="onDateChange($event.value)">
+  <div class="date-strip-container">
+    @for (day of daysList(); track day.date.getTime()) {
+      <button
+        (click)="selectDate(day.date)"
+        [class]="isSelected(day.date) ? 'date-card date-card-active' : 'date-card date-card-inactive'">
 
-    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-    <mat-hint>Date sélectionnée par défaut : Aujourd'hui</mat-hint>
-  </mat-form-field>
+        <span class="day-name">{{ day.dayName }}</span>
+        <span class="day-number">{{ day.dayNumber }}</span>
+        <span class="month-name">{{ day.monthName }}</span>
+
+      </button>
+    }
+  </div>
 </div>

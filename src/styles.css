@@ -98,33 +98,57 @@
   .padel-avatar {
     @apply !bg-slate-800 !text-white rounded-2xl flex items-center justify-center font-black shadow-sm;
   }
-  /* --- RÉCAPITULATIF DE RÉSERVATION --- */
-  .reservation-summary-card {
-    @apply mt-12 p-8 bg-slate-900 rounded-[2.5rem] text-white shadow-2xl;
+
+  /* --- DATE SELECTOR (Les classes qu'il te manquait) --- */
+  .date-strip-container {
+    @apply mt-12 mb-8 flex overflow-x-auto gap-4 px-6 pb-6 snap-x snap-mandatory;
+    /* Cache la barre sur mobile */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .date-selector-wrapper {
+    @apply mt-20 mb-10; /* Un gros espace de 80px (mt-20) pour bien séparer les étapes */
   }
 
-  .btn-confirm-final {
-    @apply h-16 px-10 rounded-2xl text-lg font-black uppercase tracking-wide
-    !bg-white !text-slate-900 hover:!bg-slate-100 transition-all;
+  .date-strip-container::-webkit-scrollbar {
+    display: none;
   }
 
-  /* --- ANIMATIONS TAILWIND (Si non incluses par défaut) --- */
-  @keyframes slideInUp {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
+  .date-card {
+    @apply flex-shrink-0 w-20 h-28 flex flex-col items-center justify-center
+    rounded-2xl border-2 transition-all duration-300 snap-start cursor-pointer;
+  }
+
+  .date-card-inactive {
+    @apply bg-white border-slate-100 text-slate-900 shadow-sm hover:border-slate-300;
+  }
+
+  .date-card-active {
+    @apply bg-emerald-500 border-emerald-500 text-white shadow-lg scale-105;
+  }
+
+  .date-card .day-name {
+    @apply text-[10px] font-bold uppercase tracking-widest opacity-60 mb-1;
+  }
+
+  .date-card .day-number {
+    @apply text-2xl font-black my-1;
+  }
+
+  .date-card .month-name {
+    @apply text-[9px] font-black uppercase tracking-wider;
+  }
+
+  /* Adaptation Desktop pour le scroll */
+  @media (min-width: 768px) {
+    .date-card {
+      @apply w-24 h-32;
     }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+    .date-strip-container {
+      @apply px-0;
+      /* On rend le scroll possible à la souris sur PC */
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
     }
   }
-  .animate-in {
-    animation: slideInUp 0.6s ease-out forwards;
-  }
-  .mdc-button.mat-mdc-flat-button.mat-primary {
-    --mdc-flat-button-container-color: white !important;
-    --mdc-flat-button-label-text-color: #0f172a !important;
-  }
-
 }

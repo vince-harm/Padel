@@ -1,25 +1,89 @@
-import {Component, input, output, signal} from '@angular/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import {FormsModule} from '@angular/forms';
+import {Component, output, signal, OnInit, inject, input} from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+
+interface DayItem {
+  date: Date;
+  dayName: string;    // 'Lun', 'Mar'...
+  dayNumber: string;  // '25'
+  monthName: string;  // 'MARS'
+}
 
 @Component({
   selector: 'app-date-selector',
   standalone: true,
-  providers: [provideNativeDateAdapter()],
-  imports: [MatFormFieldModule, MatInputModule, MatDatepickerModule, FormsModule],
+  imports: [CommonModule],
+  providers: [DatePipe],
   templateUrl: './date-selector.html'
 })
-export class DateSelectorComponent {
-  dateChange = output<Date>(); // On prévient le parent quand la date change
+export class DateSelectorComponent implements OnInit {
   courtName = input<string>('');
-  initialDate = input<Date | null>(new Date());
-  minDate = new Date(); // On ne peut pas réserver dans le passé
-  maxDate = new Date(new Date().setMonth(new Date().getMonth() + 2)); // Max 2 mois à l'avance
+  initialDate = input<Date | null>(null);
+  private datePipe = inject(DatePipe);
 
-  onDateChange(date: Date) {
-    this.dateChange.emit(date);
+  // Événement pour envoyer la date au parent (ReservationPage)
+  dateChange = output<Date>();
+
+  // Date sélectionnée
+  selectedDate = signal<Date>(this.resetTime(new Date()));
+
+  // Liste des 21 jours
+  daysList = signal<DayItem[]>([]);
+
+  ngOnInit() {
+    this.generateThreeWeeks();
+  }
+
+  /**
+   * Génère les 21 jours (3 semaines) à partir d'aujourd'hui
+   */
+  generateThreeWeeks() {
+    const days: DayItem[] = [];
+    const today = this.resetTime(new Date());
+
+    for (let i = 0; i < 21; i++) {
+      const current = new Date(today);
+      current.setDate(today.getDate() + i);
+
+      days.push({
+        date: current,
+        dayName: this.formatDate(current, 'EEE'),
+        dayNumber: this.formatDate(current, 'd'),
+        monthName: this.formatDate(current, 'MMM').toUpperCase()
+      });
+    }
+    this.daysList.set(days);
+  }
+
+  /**
+   * Action au clic sur un jour
+   */
+  selectDate(date: Date) {
+    const cleanDate = this.resetTime(date);
+    this.selectedDate.set(cleanDate);
+    this.dateChange.emit(cleanDate);
+  }
+
+  /**
+   * Vérifie si la date est celle sélectionnée (pour le style CSS)
+   */
+  isSelected(date: Date): boolean {
+    return date.getTime() === this.selectedDate().getTime();
+  }
+
+  /**
+   * Helper : Réinitialise l'heure à minuit pour comparer uniquement les jours
+   */
+  private resetTime(date: Date): Date {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }
+
+  /**
+   * Helper : Formatage rapide via DatePipe
+   */
+  private formatDate(date: Date, format: string): string {
+    const res = this.datePipe.transform(date, format) || '';
+    return res.charAt(0).toUpperCase() + res.slice(1).replace('.', '');
   }
 }
