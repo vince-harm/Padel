@@ -36,7 +36,7 @@ export class DateSelectorComponent implements OnInit {
     const days: DayItem[] = [];
     const today = this.resetTime(new Date());
 
-    for (let i = 0; i < 21; i++) {
+    for (let i = 0; i < 22; i++) {
       const current = new Date(today);
       current.setDate(today.getDate() + i);
 

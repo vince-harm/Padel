@@ -4,7 +4,7 @@
     <header class="page-header">
       <h1 class="page-title">{{ currentSite.clubName }}</h1>
       <p class="text-slate-500 mt-4">
-        {{ currentSite.city }} — Choisisser votre terrain pour accéder au calendrier.
+        {{ currentSite.city }} — Choisit ton terrain pour accéder au calendrier.
       </p>
       <div class="title-separator"></div>
     </header>
@@ -20,7 +20,7 @@
           [buttonLabel]="selectedCourt()?.id === court.id ? 'Terrain Sélectionné' : 'Choisir ce terrain'"
           (cardClick)="selectCourt(court)">
 
-          Profiter d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
+          Profite d'une session de jeu exceptionnelle sur notre terrain {{ court.name }}.
 
         </app-padel-card>
       }
@@ -42,7 +42,7 @@
             <div class="flex flex-col md:flex-row justify-between items-center gap-6">
               <div class="text-left w-full">
                 <p class="text-slate-400 uppercase tracking-widest text-[10px] font-black mb-2">
-                  Votre réservation
+                  Ta réservation
                 </p>
                 <h3 class="text-white text-xl md:text-2xl font-black">
                   {{ court.name }} <span class="text-emerald-400 mx-1">•</span>
