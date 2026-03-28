@@ -72,8 +72,8 @@ export class ReservationPage implements OnInit {
         playerName: 'TEST'
       };
       this.reservationService.saveReservation(newReservation).subscribe({
-        next: (response) => {
-          console.log('Réservation enregistrée avec succès :', response);
+        next: (reservation) => {
+          console.log('Réservation enregistrée avec succès :', reservation);
           alert('Réservation confirmée !');
         },
         error: (error) => {
