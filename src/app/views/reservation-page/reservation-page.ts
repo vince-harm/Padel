@@ -10,6 +10,7 @@ import {PadelCardComponent} from '../padel-card/padel-card';
 import {DateSelectorComponent} from '../date-selector/date-selector';
 import {TimeSlotsComponent} from '../time-slot/time-slot';
 import {DatePipe} from '@angular/common';
+import {ReservationService} from '../../services/reservation';
 
 @Component({
   selector: 'app-reservation-page',
@@ -29,6 +30,7 @@ import {DatePipe} from '@angular/common';
 export class ReservationPage implements OnInit {
   private route = inject(ActivatedRoute);
   private padelService = inject(PadelService);
+  private reservationService = inject(ReservationService);
 
   site = signal<PadelSite | undefined>(undefined);
   selectedCourt = signal<PadelCourt | undefined>(undefined);
