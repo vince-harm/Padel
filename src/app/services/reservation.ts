@@ -16,7 +16,12 @@ export class ReservationService {
   private http = inject(HttpClient);
   private readonly API_URL = 'http://localhost:8080/reservations';
 
-  saveReservation(reservation: Reservation): Observable<Reservation> {
+  saveReservation(reservation: {
+    courtName: string;
+    date: Date;
+    timeSlot: string;
+    playerName: string
+  }): Observable<Reservation> {
     return this.http.post<Reservation>(this.API_URL, reservation);
   }
 

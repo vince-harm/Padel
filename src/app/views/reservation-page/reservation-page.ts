@@ -59,4 +59,28 @@ export class ReservationPage implements OnInit {
     this.selectedCourt.set(court);
     this.selectedTime.set(null);
   }
+  onConfirmBooking(){
+    const court = this.selectedCourt();
+    const date = this.selectedDate();
+    const time= this.selectedTime();
+
+    if (court && date && time){
+      const newReservation = {
+        courtName: court.name,
+        date: date,
+        timeSlot: time,
+        playerName: 'TEST'
+      };
+      this.reservationService.saveReservation(newReservation).subscribe({
+        next: (response) => {
+          console.log('Réservation enregistrée avec succès :', response);
+          alert('Réservation confirmée !');
+        },
+        error: (error) => {
+          console.error('Erreur lors de l\'enregistrement de la réservation :', error);
+          alert('Erreur lors de la réservation. Veuillez réessayer.');
+        }
+      });
+    }
+  }
 }
