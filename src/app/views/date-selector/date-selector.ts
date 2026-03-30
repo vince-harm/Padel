@@ -23,7 +23,6 @@ export class DateSelectorComponent implements OnInit {
 
   dateChange = output<Date>();
 
-  // Date sélectionnée
   selectedDate = signal<Date>(this.resetTime(new Date()));
 
   // Liste des 21 jours

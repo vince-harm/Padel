@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './padel-card.html'
 })
 export class PadelCardComponent {
-  // Les entrées (données venant du parent)
+
   title = input.required<string>();
   subtitle = input<string>('');
   initial = input<string>('');
@@ -18,7 +18,6 @@ export class PadelCardComponent {
   buttonLabel = input<string>('Réserver');
   isSelected = input<boolean>(false);
 
-  // L'événement (pour prévenir le parent d'un clic)
   cardClick = output<void>();
 
   onButtonClick() {
