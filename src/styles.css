@@ -1,171 +1,18 @@
 @import "tailwindcss";
 
-@layer components {
-  /* --- STRUCTURE GLOBALE --- */
-  .page-container {
-    @apply min-h-screen bg-slate-50 p-6 md:p-12 font-sans;
-  }
+/* Scrollbar styles for date selector */
+.date-strip-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
 
-  .page-header {
-    @apply text-center mb-16;
-  }
+.date-strip-container::-webkit-scrollbar {
+  display: none;
+}
 
-  .page-title {
-    @apply text-4xl md:text-5xl font-black text-slate-900 uppercase tracking-tighter;
-  }
-
-  .page-subtitle {
-    @apply text-slate-500 mt-4 text-sm md:text-base;
-  }
-
-  .title-separator {
-    @apply w-16 h-1 bg-slate-900 mx-auto mt-4 rounded-full;
-  }
-
-  .court-grid {
-    @apply grid grid-cols-1 md:grid-cols-3 gap-10 max-w-7xl mx-auto items-stretch;
-  }
-
-  /* --- HEADER & NAVIGATION --- */
-  .main-header {
-    @apply bg-white border-b border-slate-100 py-6 px-12 flex justify-between items-center sticky top-0 z-50 shadow-sm;
-  }
-
-  .header-logo {
-    @apply flex items-center gap-3 no-underline cursor-pointer;
-  }
-
-  .logo-icon-box {
-    @apply w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white group-hover:bg-slate-800 transition-all;
-  }
-
-  .nav-link-container {
-    @apply hidden md:flex gap-8 items-center font-bold uppercase text-[11px] tracking-widest text-slate-500;
-  }
-
-  .nav-link {
-    @apply hover:text-slate-900 transition-colors cursor-pointer no-underline;
-  }
-
-  .user-avatar-circle {
-    @apply w-10 h-10 rounded-full bg-slate-200 border-2 border-white shadow-sm flex items-center justify-center overflow-hidden;
-  }
-
-  /* --- FOOTER --- */
-  .main-footer {
-    @apply bg-white border-t border-slate-100 pt-16 pb-8 px-6 md:px-12 mt-20;
-  }
-
-  .footer-grid {
-    @apply max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12;
-  }
-
-  .footer-column-title {
-    @apply font-black uppercase text-[11px] tracking-[0.2em] text-slate-900 mb-6;
-  }
-
-  .footer-link {
-    @apply block text-slate-500 hover:text-slate-900 transition-colors mb-3 no-underline text-sm font-medium;
-  }
-
-  .footer-bottom {
-    @apply max-w-7xl mx-auto pt-8 border-t border-slate-50 flex flex-col md:flex-row justify-between items-center gap-4;
-  }
-
-  /* --- COMPOSANTS (CARTES & BOUTONS) --- */
-  .padel-card {
-    @apply !rounded-[2.5rem] shadow-xl hover:shadow-2xl transition-all duration-500
-    border-none overflow-hidden bg-white flex flex-col min-h-[500px] cursor-pointer;
-  }
-
-  .padel-card-selected {
-    @apply ring-4 ring-slate-900 ring-offset-4 scale-[1.02];
-  }
-
-  .card-image-container {
-    @apply h-64 w-full overflow-hidden bg-slate-200 relative;
-  }
-
-  .card-description {
-    @apply text-slate-500 leading-relaxed text-sm;
-  }
-
-  .btn-primary-padel {
-    @apply w-full !py-8 !rounded-2xl font-black text-base uppercase tracking-widest
-    !bg-slate-900 !text-white hover:!bg-slate-800 transition-all;
-  }
-
-  .padel-avatar {
-    @apply !bg-slate-800 !text-white rounded-2xl flex items-center justify-center font-black shadow-sm;
-  }
-
-
-  /* --- DATE SELECTOR (Les classes qu'il te manquait) --- */
+@media (min-width: 768px) {
   .date-strip-container {
-    @apply mt-12 mb-8 flex overflow-x-auto gap-4 px-6 pb-6 snap-x snap-mandatory;
-    /* Cache la barre sur mobile */
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .date-selector-wrapper {
-    @apply mt-20 mb-10; /* Un gros espace de 80px (mt-20) pour bien séparer les étapes */
-  }
-
-  .date-strip-container::-webkit-scrollbar {
-    display: none;
-  }
-
-  .date-card {
-    @apply flex-shrink-0 w-20 h-28 flex flex-col items-center justify-center
-    rounded-2xl border-2 transition-all duration-300 snap-start cursor-pointer;
-  }
-
-  .date-card-inactive {
-    @apply bg-white border-slate-100 text-slate-900 shadow-sm hover:border-slate-300;
-  }
-
-  .date-card-active {
-    @apply bg-emerald-500 border-emerald-500 text-white shadow-lg scale-105;
-  }
-
-  .date-card .day-name {
-    @apply text-[10px] font-bold uppercase tracking-widest opacity-60 mb-1;
-  }
-
-  .date-card .day-number {
-    @apply text-2xl font-black my-1;
-  }
-
-  .date-card .month-name {
-    @apply text-[9px] font-black uppercase tracking-wider;
-  }
-  /* --- RÉCAPITULATIF DE RÉSERVATION --- */
-  .reservation-summary-card {
-    /* On utilise EXACTEMENT les mêmes dimensions que ton bloc blanc */
-    @apply mt-10 p-8 rounded-[2rem] shadow-xl !bg-slate-900 !text-white border border-slate-800;
-  }
-
-  .btn-confirm-final {
-    /* Un bouton blanc élégant et imposant pour l'appel à l'action */
-    @apply !bg-white !text-slate-900 font-black uppercase tracking-widest !rounded-2xl px-8 h-14 w-full md:w-auto transition-all hover:scale-105 active:scale-95;
-    box-shadow: 0 10px 15px -3px rgba(255, 255, 255, 0.1);
-  }
-
-  /* Ajustement pour que le texte du récapitulatif soit bien blanc */
-  .reservation-summary-card h3 {
-    @apply !text-white m-0;
-  }
-
-  /* Adaptation Desktop pour le scroll */
-  @media (min-width: 768px) {
-    .date-card {
-      @apply w-24 h-32;
-    }
-    .date-strip-container {
-      @apply px-0;
-      /* On rend le scroll possible à la souris sur PC */
-      scrollbar-width: thin;
-      scrollbar-color: #cbd5e1 transparent;
-    }
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent;
   }
 }
